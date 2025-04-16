@@ -20,7 +20,7 @@ export function GameBoard({ level, foundPairs, setFoundPairs }: Props) {
         .map((_, idx) => `/assets/pairy/${level?.name}/${idx + 1}.svg`);
     const pairPathImagesList = [...singlePathImageList, ...singlePathImageList];
     const randomPairPathImages = shuffleArray(pairPathImagesList);
-    const [cards, setCards] = useState<string[]>(randomPairPathImages);
+    const [cards] = useState<string[]>(randomPairPathImages);
     const [selectedPair, setSelectedPair] = useState<{ first: FoundPair | null; second: FoundPair | null }>({
         first: null,
         second: null,
@@ -55,7 +55,7 @@ export function GameBoard({ level, foundPairs, setFoundPairs }: Props) {
                 }, 400);
             }
         }
-    }, [selectedPair]);
+    }, [selectedPair, setFoundPairs]);
 
     return (
         <div className="flex justify-center items-center p-2 h-96">

@@ -8,7 +8,7 @@ import { GameConfigTemplate } from "@/components/templates/GameConfigTemplate";
 
 
 export default function GameConfigPage() {
-    const [selectLevel, setSelectedLevel] = useState<GameLevel | null>(null);
+    const [,setSelectedLevel] = useState<GameLevel | null>(null);
     const router =  useRouter();
 
     const handleChangeLevel = (level: GameLevel) => {
