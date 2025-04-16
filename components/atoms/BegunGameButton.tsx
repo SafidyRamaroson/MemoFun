@@ -8,7 +8,7 @@ export function BegunGameButton() {
         <Link href="/game/config">
             <Button
                 size="lg"
-                className="max-sm:mb-20"
+                className="max-sm:mb-4"
             >
                 Commencer le Jeu
             </Button>
