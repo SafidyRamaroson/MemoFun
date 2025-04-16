@@ -11,7 +11,7 @@ type Props = {
 
 export function CardItem({ path, isFlipped, onClick }: Props) {
   return (
-    <div className="w-full h-full perspective" onClick={onClick}>
+    <div className="w-full h-full perspective cursor-pointer" onClick={onClick}>
       <div className={cn("flip-card-inner", { flipped: isFlipped })}>
         <div className="flip-card-back text-2xl">❓</div>
         <div className="flip-card-front">
