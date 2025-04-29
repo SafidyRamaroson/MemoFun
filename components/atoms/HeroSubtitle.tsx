@@ -1,6 +1,5 @@
 "use client";
 
-import { fadeInUpVariants } from "@/utils/motion";
 import { motion } from "motion/react";
 
 type Props = {

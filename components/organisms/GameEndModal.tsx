@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight, Settings2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
@@ -14,7 +13,6 @@ export const GameEndModal = ({
     timeString,
     onRestartGame
 }:Props) => {
-    const router = useRouter();
     return (
         <div className="absolute w-screen h-screen top-0 left-0 flex items-center justify-center p-4">
             <div className="absolute min-w-fit min-h-fit bg-white rounded-2xl shadow-2xl py-4 px-4">

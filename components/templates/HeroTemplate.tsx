@@ -1,7 +1,6 @@
 "use client";
 
 import { Hero } from "../organisms";
-import { motion } from "motion/react";
 
 export function HeroTemplate() {
     return (
