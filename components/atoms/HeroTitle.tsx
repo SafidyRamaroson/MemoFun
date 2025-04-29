@@ -1,15 +1,31 @@
 "use client";
 
+import { fadeInUpVariants } from "@/utils/motion";
+import { motion } from "motion/react";
+import { ReactNode } from "react";
+
 type Props = {
-    title: string;
+    title: ReactNode;
 }
 
 export function HeroTitle({
     title
 }: Props) {
     return (
-        <h1 className="text-slate-800 text-wrap text-8xl font-bold max-sm:text-5xl mb-2">
+        <motion.h1
+            initial= {{
+                opacity: 0,
+                y: 20,
+            }}
+            animate={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                    duration: 0.6
+                }
+            }}
+            className="text-wrap text-6xl font-bold max-sm:text-5xl mb-2">
             {title}
-        </h1>
+        </motion.h1>
     )
 }

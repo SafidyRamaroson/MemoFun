@@ -3,6 +3,9 @@
 import { GameLevel } from "@/types";
 import { cn } from "@/utils/tailwind";
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import { getItem } from "@/utils/localStorage";
+import { childVariants } from "@/utils/motion";
 
 type Props = {
     gameLevel: GameLevel;
@@ -15,23 +18,17 @@ export function SelectGameLevel({
 }: Props) {
     const [currentLevel, setCurrentLevel] = useState<GameLevel | null>(null);
     useEffect(() => {
-        const stored = localStorage.getItem("level");
-        if (stored) {
-            try {
-                const parsed = JSON.parse(stored);
-                setCurrentLevel(parsed);
-            } catch (error) {
-                console.error("Erreur parsing level:", error);
-                localStorage.removeItem("level");
-            }
-        }
+        const level = getItem("level");
+        setCurrentLevel(level as GameLevel);
     }, []);
-    
-    return <div
-        className={cn("border border-slate-400 p-4 rounded-md hover:bg-slate-400 hover:transition-colors hover:ease-in-out hover:duration-300 cursor-pointer",gameLevel === currentLevel && "bg-slate-400")}
+
+    return <motion.div
+        variants={childVariants}
+        layout
+        className={cn("border border-blue-400 p-4 rounded-md hover:bg-blue-100 hover:transition-colors hover:ease-in-out hover:duration-300 cursor-pointer", { "bg-blue-100 text-red-400": gameLevel == currentLevel })}
         onClick={() => onGameLevel(gameLevel)}
     >
-        <h4 className="font-extrabold">{gameLevel.name}</h4>
-        <p>{gameLevel?.pairs} paires de carte</p>
-    </div>;
+        <h6 className="font-base">{gameLevel.name}</h6>
+        <p className="font-bold">{gameLevel?.pairs} paires de carte</p>
+    </motion.div>;
 }

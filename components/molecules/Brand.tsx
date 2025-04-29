@@ -6,8 +6,8 @@ import Link from "next/link";
 export function Brand() {
     return (
         <Link href="/" className="flex flex-row items-center gap-4">
-            <LucideGamepad className="size-12" />
-            <span className="text-xl font-semibold">MemoFun</span>
+            <LucideGamepad className="size-12 text-primary" />
+            <span className="text-xl font-semibold text-primary">MemoFun</span>
         </Link>
     );
 }

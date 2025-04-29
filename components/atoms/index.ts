@@ -1,4 +1,3 @@
-export * from "@/components/atoms/BegunGameButton";
 export * from "@/components/atoms/CardCounter";
 export * from "@/components/atoms/CardItem";
 export * from "@/components/atoms/HeroSubtitle";

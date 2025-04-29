@@ -1,9 +1,10 @@
-import { useState } from "react";
+"use client";
+import { formatTime } from "@/utils/time";
 
-export function Timer() {
-    const [seconds] = useState<number>(0);
-    const [minutes] = useState<number>(0);
-    const [hour] = useState<number>(0);
+type Props = {
+    time: number;
+}
 
-    return <span>{hour}:{minutes}:{seconds}</span>;
+export function Timer({ time }:Props) {
+    return <span>{formatTime(time)}</span>;
 }

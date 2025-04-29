@@ -1,12 +1,16 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { GameLevel } from "@/types";
-import { shuffleArray } from "@/utils/ShuffleArray";
 import { CardItem } from "../atoms";
+import { motion } from "motion/react";
+import { containerVariants } from "@/utils/motion";
 
 type Props = {
     level: GameLevel;
     foundPairs: FoundPair[];
-    setFoundPairs: Dispatch<SetStateAction<FoundPair[]>>
+    isActiveTimer: boolean;
+    cards: string[];
+    onStartTimer: () => void;
+    setFoundPairs: Dispatch<SetStateAction<FoundPair[]>>;
 };
 
 type FoundPair = {
@@ -14,13 +18,7 @@ type FoundPair = {
     path: string;
 }
 
-export function GameBoard({ level, foundPairs, setFoundPairs }: Props) {
-    const singlePathImageList = Array(level.pairs)
-        .fill(1)
-        .map((_, idx) => `/assets/pairy/${level?.name}/${idx + 1}.svg`);
-    const pairPathImagesList = [...singlePathImageList, ...singlePathImageList];
-    const randomPairPathImages = shuffleArray(pairPathImagesList);
-    const [cards] = useState<string[]>(randomPairPathImages);
+export function GameBoard({ level, foundPairs,cards,isActiveTimer, setFoundPairs, onStartTimer }: Props) {
     const [selectedPair, setSelectedPair] = useState<{ first: FoundPair | null; second: FoundPair | null }>({
         first: null,
         second: null,
@@ -28,6 +26,9 @@ export function GameBoard({ level, foundPairs, setFoundPairs }: Props) {
     
 
     const handleCardClick = (cardId: number, path: string) => {
+        if(!isActiveTimer){
+            onStartTimer();
+        }
         //On ne fait rien si la carte sélectionnée est déja dans foundPairs
         if (foundPairs.some(pair => pair.cardId === cardId && pair.path === path)) return;
         // Pour empecher que selectedPair.first repète deux fois (double click sur le mm photo)
@@ -59,8 +60,11 @@ export function GameBoard({ level, foundPairs, setFoundPairs }: Props) {
 
     return (
         <div className="flex justify-center items-center p-2 h-96">
-            <div
-                className="grid w-full h-full max-w-screen-md gap-2 rounded-md"
+            <motion.div
+                variants={containerVariants}
+                initial="initial"
+                animate="animate"
+                className="grid w-full h-full max-w-screen-md gap-1 rounded-md"
                 style={{
                     height: "min(100%, 100vh - 150px)",
                     gridTemplateColumns: `repeat(${level.grid.cols}, 1fr)`,
@@ -79,7 +83,7 @@ export function GameBoard({ level, foundPairs, setFoundPairs }: Props) {
                         }
                     />
                 ))}
-            </div>
+            </motion.div>
         </div>
     );
 }
